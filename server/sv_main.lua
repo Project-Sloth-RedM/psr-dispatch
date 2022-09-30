@@ -1,4 +1,4 @@
--- local QBCore = exports['qb-core']:GetCoreObject()
+local PSRCore = exports['psr-core']:GetCoreObject()
 local calls = {}
 
 function _U(entry)
@@ -34,9 +34,9 @@ RegisterServerEvent("dispatch:server:notify", function(data)
 
 	TriggerClientEvent('dispatch:clNotify', -1, data, newId, source)
     if not data.alert then 
-        TriggerClientEvent("ps-dispatch:client:AddCallBlip", -1, data.origin, dispatchCodes[data.dispatchcodename], newId)
+        TriggerClientEvent("psr-dispatch:client:AddCallBlip", -1, data.origin, dispatchCodes[data.dispatchcodename], newId)
     else
-        TriggerClientEvent("ps-dispatch:client:AddCallBlip", -1, data.origin, data.alert, newId)
+        TriggerClientEvent("psr-dispatch:client:AddCallBlip", -1, data.origin, data.alert, newId)
     end
 end)
 
@@ -65,7 +65,7 @@ AddEventHandler("dispatch:addUnit", function(callid, player, cb)
 end)
 
 AddEventHandler("dispatch:sendCallResponse", function(player, callid, message, time, cb)
-    local Player = exports['qbr-core']:GetPlayerData()(player)
+    local Player = PSRCore.Functions.GetPlayer(player)
     local name = Player.PlayerData.charinfo.firstname.. " " ..Player.PlayerData.charinfo.lastname
     if calls[callid] then
         calls[callid]['responses'][#calls[callid]['responses']+1] = {
@@ -100,7 +100,7 @@ end)
 
 RegisterCommand('togglealerts', function(source, args, user)
 	local source = source
-    local Player = exports['qbr-core']:GetPlayerData()(source)
+    local Player = PSRCore.Functions.GetPlayer(source)
 	local job = Player.PlayerData.job
 	if IsPoliceJob(job.name) or job.name == 'ambulance' then
 		TriggerClientEvent('dispatch:manageNotifs', source, args[1])
@@ -114,7 +114,7 @@ AddEventHandler('explosionEvent', function(source, info)
 
     for i = 1, (#Config.ExplosionTypes) do
         if info.explosionType == Config.ExplosionTypes[i] then
-            TriggerClientEvent("ps-dispatch:client:Explosion", source)
+            TriggerClientEvent("psr-dispatch:client:Explosion", source)
             ExplosionCooldown = true
             SetTimeout(1500, function()
                 ExplosionCooldown = false
@@ -123,11 +123,11 @@ AddEventHandler('explosionEvent', function(source, info)
     end
 end)
 
--- QBCore.Commands.Add("cleardispatchblips", "Clear all dispatch blips", {}, false, function(source, args)
---     local src = source
---     local Player = exports['qbr-core']:GetPlayerData()(src)
--- 	local job = Player.PlayerData.job.name
---     if IsDispatchJob(job) then
---         TriggerClientEvent('ps-dispatch:client:clearAllBlips', src)
---     end
--- end)
+PSRCore.Commands.Add("cleardispatchblips", "Clear all dispatch blips", {}, false, function(source, args)
+    local src = source
+    local Player = PSRCore.Functions.GetPlayer(src)
+	local job = Player.PlayerData.job.name
+    if IsDispatchJob(job) then
+        TriggerClientEvent('psr-dispatch:client:clearAllBlips', src)
+    end
+end)

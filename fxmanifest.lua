@@ -3,7 +3,7 @@ game 'rdr3'
 rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 
 version '0.0'
-description 'https://github.com/Project-Sloth/ps-dispatch'
+description 'https://github.com/Project-Sloth/psr-dispatch'
 
 shared_scripts {
     'config.lua',

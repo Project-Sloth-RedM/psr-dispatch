@@ -1,6 +1,6 @@
-# QBCore Dispatch
+# PSRCore Dispatch
 
-Integrated with https://github.com/Project-Sloth/ps-mdt
+Integrated with https://github.com/Project-Sloth/psr-mdt
 
 For all support questions, ask in our Discord support chat. Do not create issues if you need help. Issues are for bug reporting and new features only.
 
@@ -19,7 +19,7 @@ https://www.discord.gg/projectsloth
 
 # Custom Alert Handler
 ```lua
-exports["ps-dispatch"]:CustomAlert({
+exports["psr-dispatch"]:CustomAlert({
     coords = vector3(0.0, 0.0, 0.0),
     message = "Criminal Activity",
     dispatchCode = "10-4 Rubber Ducky",
@@ -62,61 +62,61 @@ sound2 -- GTA sound to play
 # Preset Alert Exports.
 
 ```lua
-- exports['ps-dispatch']:VehicleShooting(vehicle)
+- exports['psr-dispatch']:VehicleShooting(vehicle)
 
-- exports['ps-dispatch']:Shooting()
+- exports['psr-dispatch']:Shooting()
 
-- exports['ps-dispatch']:OfficerDown()
+- exports['psr-dispatch']:OfficerDown()
 
-- exports['ps-dispatch']:SpeedingVehicle(vehicle)
+- exports['psr-dispatch']:SpeedingVehicle(vehicle)
 
-- exports['ps-dispatch']:Fight()
+- exports['psr-dispatch']:Fight()
 
-- exports['ps-dispatch']:InjuriedPerson()
+- exports['psr-dispatch']:InjuriedPerson()
 
-- exports['ps-dispatch']:StoreRobbery(camId)
+- exports['psr-dispatch']:StoreRobbery(camId)
 
-- exports['ps-dispatch']:FleecaBankRobbery(camId)
+- exports['psr-dispatch']:FleecaBankRobbery(camId)
 
-- exports['ps-dispatch']:PaletoBankRobbery(camId)
+- exports['psr-dispatch']:PaletoBankRobbery(camId)
 
-- exports['ps-dispatch']:PacificBankRobbery(camId)
+- exports['psr-dispatch']:PacificBankRobbery(camId)
 
-- exports['ps-dispatch']:PrisonBreak()
+- exports['psr-dispatch']:PrisonBreak()
 
-- exports['ps-dispatch']:VangelicoRobbery(camId)
+- exports['psr-dispatch']:VangelicoRobbery(camId)
 
-- exports['ps-dispatch']:HouseRobbery()
+- exports['psr-dispatch']:HouseRobbery()
 
-- exports['ps-dispatch']:PrisonBreak()
+- exports['psr-dispatch']:PrisonBreak()
 
-- exports['ps-dispatch']:DrugSale()
+- exports['psr-dispatch']:DrugSale()
 
-- exports['ps-dispatch']:ArtGalleryRobbery()
+- exports['psr-dispatch']:ArtGalleryRobbery()
 
-- exports['ps-dispatch']:HumaneRobery()
+- exports['psr-dispatch']:HumaneRobery()
 
-- exports['ps-dispatch']:TrainRobbery()
+- exports['psr-dispatch']:TrainRobbery()
 
-- exports['ps-dispatch']:VanRobbery()
+- exports['psr-dispatch']:VanRobbery()
 
-- exports['ps-dispatch']:UndergroundRobbery()
+- exports['psr-dispatch']:UndergroundRobbery()
 
-- exports['ps-dispatch']:DrugBoatRobbery()
+- exports['psr-dispatch']:DrugBoatRobbery()
 
-- exports['ps-dispatch']:UnionRobbery()
+- exports['psr-dispatch']:UnionRobbery()
 
-- exports['ps-dispatch']:YachtHeist()
+- exports['psr-dispatch']:YachtHeist()
 
-- exports['ps-dispatch']:CarBoosting(vehicle)
+- exports['psr-dispatch']:CarBoosting(vehicle)
 
-- exports['ps-dispatch']:CarJacking(vehicle)
+- exports['psr-dispatch']:CarJacking(vehicle)
 
-- exports['ps-dispatch']:VehicleTheft(vehicle)
+- exports['psr-dispatch']:VehicleTheft(vehicle)
 
-- exports['ps-dispatch']:SuspiciousActivity()
+- exports['psr-dispatch']:SuspiciousActivity()
 
-- exports['ps-dispatch']:SignRobbery()
+- exports['psr-dispatch']:SignRobbery()
 ```
 
 # Steps to Create New Alert
@@ -161,10 +161,10 @@ Information about each parameter is in the file.
 # Alerts with Vehicle Information
 1. If you want to display vehicle information with a particular alert, you need to pass the vehicle along with the exports like this
 ```lua 
-exports['ps-dispatch']:TestVehicleAlert(vehicle)
+exports['psr-dispatch']:TestVehicleAlert(vehicle)
 ```
 
-and its function in ps-dispatch would look like this
+and its function in psr-dispatch would look like this
 
 ```lua
 local function TestVehicleAlert(vehicle)

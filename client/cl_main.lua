@@ -1,18 +1,26 @@
 PlayerData = {}
 PlayerJob = {}
 isLoggedIn = true
-QBCore = exports['qb-core']:GetCoreObject()
+PSRCore = exports['psr-core']:GetCoreObject()
 local blips = {}
 
 -- core related
 
-RegisterNetEvent("QBCore:Client:OnPlayerLoaded", function()
-    isLoggedIn = true
-    PlayerData = exports['qbr-core']:GetPlayerData()
-    PlayerJob = exports['qbr-core']:GetPlayerData().job
+AddEventHandler('onResourceStart', function(resourceName)
+    if GetCurrentResourceName() == resourceName then
+		isLoggedIn = true
+        PlayerData = PSRCore.Functions.GetPlayerData()
+        PlayerJob = PSRCore.Functions.GetPlayerData().job
+    end
 end)
 
-RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
+RegisterNetEvent("PSRCore:Client:OnPlayerLoaded", function()
+    isLoggedIn = true
+    PlayerData = PSRCore.Functions.GetPlayerData()
+    PlayerJob = PSRCore.Functions.GetPlayerData().job
+end)
+
+RegisterNetEvent('PSRCore:Client:OnPlayerUnload', function()
 	PlayerData = {}
     isLoggedIn = false
     currentCallSign = ""
@@ -20,8 +28,8 @@ RegisterNetEvent('QBCore:Client:OnPlayerUnload', function()
     -- removeHuntingZones()
 end)
 
-RegisterNetEvent("QBCore:Client:OnJobUpdate", function(JobInfo)
-    PlayerData = exports['qbr-core']:GetPlayerData()
+RegisterNetEvent("PSRCore:Client:OnJobUpdate", function(JobInfo)
+    PlayerData = PSRCore.Functions.GetPlayerData()
     PlayerJob = JobInfo
 end)
 
@@ -146,7 +154,7 @@ end
 
 function GetPedGender()
     local gender = "Male"
-    if exports['qbr-core']:GetPlayerData().charinfo.gender == 1 then gender = "Female" end
+    if PSRCore.Functions.GetPlayerData().charinfo.gender == 1 then gender = "Female" end
     return gender
 end
 
@@ -192,17 +200,17 @@ RegisterNetEvent('dispatch:manageNotifs', function(sentSetting)
     if wantedSetting == "on" then
         disableNotis = false
         disableNotifSounds = false
-        exports['qbr-core']:Notify("Dispatch enabled", "success")
+        PSRCore.Functions.Notify("Dispatch enabled", "success")
     elseif wantedSetting == "off" then
         disableNotis = true
         disableNotifSounds = true
-        exports['qbr-core']:Notify("Dispatch disabled", "success")
+        PSRCore.Functions.Notify("Dispatch disabled", "success")
     elseif wantedSetting == "mute" then
         disableNotis = false
         disableNotifSounds = true
-        exports['qbr-core']:Notify("Dispatch muted", "success")
+        PSRCore.Functions.Notify("Dispatch muted", "success")
     else
-        exports['qbr-core']:Notify('Please choose to have dispatch as "on", "off" or "mute".', "success")
+        PSRCore.Functions.Notify('Please choose to have dispatch as "on", "off" or "mute".', "success")
 
     end
 end)
@@ -225,8 +233,8 @@ RegisterNetEvent('dispatch:clNotify', function(sNotificationData, sNotificationI
     end
 end)
 
-RegisterNetEvent("ps-dispatch:client:AddCallBlip")
-AddEventHandler("ps-dispatch:client:AddCallBlip", function(coords, data, blipId)
+RegisterNetEvent("psr-dispatch:client:AddCallBlip")
+AddEventHandler("psr-dispatch:client:AddCallBlip", function(coords, data, blipId)
 	if IsValidJob(data.recipientList) then
 		PlaySound(-1, data.sound, data.sound2, 0, 0, 1)
 		TriggerServerEvent("InteractSound_SV:PlayOnSource", data.sound, 0.25) -- For Custom Sounds
@@ -311,17 +319,17 @@ RegisterNetEvent('dispatch:getCallResponse', function(message)
     })
 end)
 
-RegisterNetEvent("ps-dispatch:client:Explosion", function(data)
-	exports["ps-dispatch"]:Explosion()
+RegisterNetEvent("psr-dispatch:client:Explosion", function(data)
+	exports["psr-dispatch"]:Explosion()
 end)
 
-RegisterNetEvent("ps-dispatch:client:removeCallBlip", function(blipId)
+RegisterNetEvent("psr-dispatch:client:removeCallBlip", function(blipId)
 	RemoveBlip(blips[blipId])
 end)
 
-RegisterNetEvent("ps-dispatch:client:clearAllBlips", function()
+RegisterNetEvent("psr-dispatch:client:clearAllBlips", function()
 	for k, v in pairs(blips) do
 		RemoveBlip(v)
 	end
-	exports['qbr-core']:Notify('All dispatch blips cleared', "success")
+	PSRCore.Functions.Notify('All dispatch blips cleared', "success")
 end)

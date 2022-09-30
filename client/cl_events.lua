@@ -72,7 +72,7 @@ end
 exports('VehicleTheft', VehicleTheft)
 
 local function VehicleShooting(vehdata)
-    local vehicle = exports['qbr-core']:GetClosestVehicle()
+    local vehicle = PSRCore.Functions.GetClosestVehicle()
     local vehdata = vehicleData(vehicle)
     local currentPos = GetEntityCoords(PlayerPedId())
     local locationInfo = getStreetandZone(currentPos)
@@ -493,7 +493,7 @@ exports('DrugSale', DrugSale)
 
 
 -- for rcore_gangs, haven't tested server side exports so made this instead. Remove if you do not need :)
-RegisterNetEvent('ps-dispatch:client:drugsale', function()
+RegisterNetEvent('psr-dispatch:client:drugsale', function()
     DrugSale()
 end)
 
@@ -525,10 +525,10 @@ end
 exports('CarJacking', CarJacking)
 
 local function OfficerDown()
-    local plyData = exports['qbr-core']:GetPlayerData()
+    local plyData = PSRCore.Functions.GetPlayerData()
     local currentPos = GetEntityCoords(PlayerPedId())
     local locationInfo = getStreetandZone(currentPos)
-    local callsign = exports['qbr-core']:GetPlayerData().metadata["callsign"]
+    local callsign = PSRCore.Functions.GetPlayerData().metadata["callsign"]
     TriggerServerEvent("dispatch:server:notify", {
         dispatchcodename = "officerdown", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
         dispatchCode = "10-99",
@@ -552,15 +552,15 @@ end
 
 exports('OfficerDown', OfficerDown)
 
-RegisterNetEvent("ps-dispatch:client:officerdown", function ()
+RegisterNetEvent("psr-dispatch:client:officerdown", function ()
     OfficerDown()
 end)
 
 local function EmsDown()
-    local plyData = exports['qbr-core']:GetPlayerData()
+    local plyData = PSRCore.Functions.GetPlayerData()
     local currentPos = GetEntityCoords(PlayerPedId())
     local locationInfo = getStreetandZone(currentPos)
-    local callsign = exports['qbr-core']:GetPlayerData().metadata["callsign"]
+    local callsign = PSRCore.Functions.GetPlayerData().metadata["callsign"]
     TriggerServerEvent("dispatch:server:notify", {
         dispatchcodename = "emsdown", -- has to match the codes in sv_dispatchcodes.lua so that it generates the right blip
         dispatchCode = "10-99",
@@ -584,7 +584,7 @@ end
 
 exports('EmsDown', EmsDown)
 
-RegisterNetEvent("ps-dispatch:client:emsdown", function ()
+RegisterNetEvent("psr-dispatch:client:emsdown", function ()
     EmsDown()
 end)
 
